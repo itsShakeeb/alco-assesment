@@ -43,6 +43,10 @@ const ListOfProduct = (props) => {
   };
 
   useEffect(() => {
+    let localcart = [];
+    if (!JSON.parse(localStorage.getItem("localcart"))) {
+      JSON.stringify(localStorage.setItem("localcart", localcart));
+    }
     props.getProductList();
   }, []);
 

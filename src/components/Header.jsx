@@ -24,14 +24,30 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = (props) => {
   const classes = useStyles();
-  const localCartLength = Object.keys(
-    JSON.parse(localStorage.getItem("localcart"))
-  ).length;
+  // const localCartLength = Object.keys(
+  //   JSON.parse(localStorage.getItem("localcart"))
+  // ).length;
+  JSON.stringify();
+  let localCartLength;
+  if (!localStorage.getItem("localcart")) {
+    let localcart = [];
+    localStorage.setItem("localcart", JSON.stringify(localcart));
+  } else {
+    if (JSON.parse(localStorage.getItem("localcart")).length == 0) {
+      localCartLength = 0;
+    } else {
+      localCartLength = JSON.parse(localStorage.getItem("localcart")).length;
+    }
+  }
+  // console.log(localStorage.getItem("localcart"));
+  // let localCartLength = localStorage.getItem("localcart")
+  //   ? JSON.parse(localStorage.getItem("localcart"))
+  //   : 0;
 
-  console.log(localCartLength);
-  const [cartItemCount, setCartItemCount] = useState(localCartLength);
+  // console.log(localCartLength.length);
+  const [cartItemCount, setCartItemCount] = useState(0);
   useEffect(() => {
-    setCartItemCount(localCartLength);
+    setCartItemCount(0);
   }, []);
 
   return (
@@ -42,7 +58,7 @@ const Header = (props) => {
             Alco
           </Typography>
           <Link to='/cart'>
-            <Badge badgeContent={cartItemCount} color='error'>
+            <Badge badgeContent={localCartLength} color='error'>
               <ShoppingCartIcon />
             </Badge>
           </Link>

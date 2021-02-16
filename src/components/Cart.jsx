@@ -33,17 +33,29 @@ function Cart() {
 
   const theme = useTheme();
   const allItemOfCart = JSON.parse(localStorage.getItem("localcart"));
-  console.log(allItemOfCart);
-  const addingPrice = allItemOfCart.map((product) => {
-    return product.price;
-  });
-  const totalPrice = addingPrice.reduce((curr, acc) => {
-    return curr + acc;
-  });
-  const deliveryCharge = 50;
-  const gst = (totalPrice + deliveryCharge) * 0.18;
-  const bagTotal = totalPrice + deliveryCharge + gst;
-
+  console.log(allItemOfCart.length);
+  let addingPrice = 0;
+  let totalPrice = 0;
+  let deliveryCharge = 0;
+  let gst = 18;
+  let bagTotal = 0;
+  if (allItemOfCart.length == 0) {
+    addingPrice = 0;
+    totalPrice = 0;
+    deliveryCharge = 0;
+    gst = 18;
+    bagTotal = 0;
+  } else {
+    addingPrice = allItemOfCart.map((product) => {
+      return product.price;
+    });
+    totalPrice = addingPrice.reduce((curr, acc) => {
+      return curr + acc;
+    });
+    deliveryCharge = 50;
+    gst = (totalPrice + deliveryCharge) * 0.18;
+    bagTotal = totalPrice + deliveryCharge + gst;
+  }
   return (
     <div>
       <Header />
