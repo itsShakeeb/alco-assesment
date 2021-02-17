@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +33,16 @@ function Cart() {
   const classes = useStyles();
 
   const theme = useTheme();
-  const allItemOfCart = JSON.parse(localStorage.getItem("localcart"));
+  let allItemOfCart = JSON.parse(localStorage.getItem("localcart"));
+  const deleteItem = (id) => {
+    let cartIndex = allItemOfCart.findIndex((item) => item.id === id);
+    if (cartIndex > -1) {
+      allItemOfCart.splice(cartIndex, 1);
+      localStorage.setItem("localcart", JSON.stringify(allItemOfCart));
+    }
+    alert("Item Removed");
+    window.location.reload(true);
+  };
   console.log(allItemOfCart.length);
   let addingPrice = 0;
   let totalPrice = 0;
@@ -56,6 +66,7 @@ function Cart() {
     gst = (totalPrice + deliveryCharge) * 0.18;
     bagTotal = totalPrice + deliveryCharge + gst;
   }
+
   return (
     <div>
       <Header />
@@ -71,6 +82,13 @@ function Cart() {
                   <Typography variant='subtitle1' color='textSecondary'>
                     {`$${product.price}`}
                   </Typography>
+                  <Button
+                    size='large'
+                    color='secondary'
+                    onClick={() => deleteItem(product.id)}
+                  >
+                    Delete
+                  </Button>
                 </CardContent>
               </div>
               <CardMedia

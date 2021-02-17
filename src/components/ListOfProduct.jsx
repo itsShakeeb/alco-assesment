@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getProductList, addToCart } from "../redux";
-import { useLocation, useParams } from "react-router-dom";
+import { getProductList, addToCart, getCategory } from "../redux";
+import { useLocation } from "react-router-dom";
 import ProductCard from "./ProductCard";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import Pagination from "@material-ui/lab/Pagination";
-import InputField from "./Category/InputField";
+import Button from "@material-ui/core/Button";
 
 const ListOfProduct = (props) => {
   const location = useLocation();
@@ -25,6 +21,7 @@ const ListOfProduct = (props) => {
 
   const categoryHandleChange = (event) => {
     setValue(event.target.value);
+    // setValues({ ...values, gender: event.target.value });
   };
   const paginationHandler = (event) => {
     setCurrentPage((prevState) => prevState + 1);
@@ -40,14 +37,20 @@ const ListOfProduct = (props) => {
 
   const addToCartLocal = (product) => {
     props.addToCart(product);
+    alert("Item added");
+    window.location.reload(true);
   };
-
+  const clearFilter = () => {
+    setValue("");
+    window.location.reload(true);
+  };
   useEffect(() => {
     let localcart = [];
     if (!JSON.parse(localStorage.getItem("localcart"))) {
       JSON.stringify(localStorage.setItem("localcart", localcart));
     }
     props.getProductList();
+    props.getCategory();
   }, []);
 
   console.log(value);
@@ -61,7 +64,7 @@ const ListOfProduct = (props) => {
   }
 
   const listOfProducts = currentItem.map((product, key) => (
-    <div key={key}>
+    <div key={key} style={{ marginTop: "100px" }}>
       <ProductCard
         title={product.title}
         image={product.image}
@@ -79,7 +82,7 @@ const ListOfProduct = (props) => {
     }
   });
   const listOfFilteredProduct = filteredData.map((product, key) => (
-    <div key={key}>
+    <div key={key} style={{ marginTop: "100px" }}>
       <ProductCard
         title={product.title}
         image={product.image}
@@ -104,22 +107,33 @@ const ListOfProduct = (props) => {
           </div>
         ) : (
           <div>
+            <h3 style={{ marginLeft: "30px" }}>Categories</h3>
             <div style={{ display: "flex" }}>
-              <FormControl component='fieldset'>
-                <FormLabel component='legend'>Gender</FormLabel>
-                <RadioGroup value={value} onChange={categoryHandleChange}>
-                  {categoryData.map((choice, key) => (
-                    <div key={key}>
-                      <InputField
-                        value={choice}
-                        control={<Radio />}
-                        label={choice.toUpperCase()}
-                      />
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
+              {categoryData.map((choice, key) => (
+                <div
+                  key={key}
+                  style={{
+                    padding: "20px",
+                    margin: "10px",
+                  }}
+                >
+                  <input
+                    type='radio'
+                    value={choice}
+                    name='category'
+                    onChange={categoryHandleChange}
+                  />
+                  {choice.toUpperCase()}
+                </div>
+              ))}
             </div>
+            <Button
+              color='primary'
+              style={{ marginLeft: "30px" }}
+              onClick={clearFilter}
+            >
+              Clear Filter
+            </Button>
 
             <div
               style={{
@@ -161,6 +175,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     addToCart: (product) => {
       dispatch(addToCart(product));
+    },
+    getCategory: () => {
+      dispatch(getCategory());
     },
   };
 };

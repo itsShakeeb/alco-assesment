@@ -30,15 +30,15 @@ export default function RecipeReviewCard(props) {
           color='textSecondary'
           component='p'
         ></Typography>
+        <CardActions disableSpacing>
+          <Typography variant='body2' color='textSecondary' component='p'>
+            {`$${price}`}
+          </Typography>
+          <Button size='large' color='secondary' onClick={addToCart}>
+            Buy Now
+          </Button>
+        </CardActions>
       </CardContent>
-      <CardActions disableSpacing>
-        <Typography variant='body2' color='textSecondary' component='p'>
-          {`$${price}`}
-        </Typography>
-        <Button size='large' color='secondary' onClick={addToCart}>
-          Buy Now
-        </Button>
-      </CardActions>
     </Card>
   );
 }
