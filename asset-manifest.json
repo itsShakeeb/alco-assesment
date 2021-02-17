@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/alco-assesment/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/alco-assesment/static/js/main.08b7d2ed.chunk.js",
+    "main.js.map": "/alco-assesment/static/js/main.08b7d2ed.chunk.js.map",
+    "runtime-main.js": "/alco-assesment/static/js/runtime-main.c43ba33a.js",
+    "runtime-main.js.map": "/alco-assesment/static/js/runtime-main.c43ba33a.js.map",
+    "static/js/2.162203a6.chunk.js": "/alco-assesment/static/js/2.162203a6.chunk.js",
+    "static/js/2.162203a6.chunk.js.map": "/alco-assesment/static/js/2.162203a6.chunk.js.map",
+    "static/js/3.4b315a43.chunk.js": "/alco-assesment/static/js/3.4b315a43.chunk.js",
+    "static/js/3.4b315a43.chunk.js.map": "/alco-assesment/static/js/3.4b315a43.chunk.js.map",
+    "index.html": "/alco-assesment/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/alco-assesment/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.162203a6.chunk.js.LICENSE.txt": "/alco-assesment/static/js/2.162203a6.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c43ba33a.js",
+    "static/js/2.162203a6.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.08b7d2ed.chunk.js"
+  ]
+}
